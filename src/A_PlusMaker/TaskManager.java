@@ -39,7 +39,7 @@ public class TaskManager {
             // 자바 내장 날짜 API 활용
             LocalDate parsedDate;
             while (true) {
-                System.out.print("마감일 (예: 06-20, 11/15): ");
+                System.out.print("마감일 / 시험일  (예: 06-20, 11/15): ");
                 String inputDeadline = scanner.nextLine();
 
                 try {
@@ -76,7 +76,7 @@ public class TaskManager {
 
             String testType;
             while (true) {
-                System.out.print("평가 방식 (1: 과제제출, 2: 필기시험): ");
+                System.out.print("시험 방식 (1: 과제제출, 2: 필기시험): ");
                 String testInput = scanner.nextLine().trim();
                 if (testInput.equals("1")) {
                     testType = "과제제출";
