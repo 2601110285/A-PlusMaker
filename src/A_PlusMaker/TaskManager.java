@@ -23,7 +23,7 @@ public class TaskManager {
             System.out.println("\n--- [" + (i + 1) + "번째 과제 등록] ---");
 
             // 💡 [방어적 프로그래밍 1] 과목 유형 1, 2 외의 값 차단
-            int type = 0;
+            int type;
             while (true) {
                 System.out.print("과목 유형을 선택하세요 (1: 전공, 2: 교양): ");
                 String typeInput = scanner.nextLine().trim(); // trim()은 혹시 모를 띄어쓰기 공백을 없애줌
@@ -38,7 +38,7 @@ public class TaskManager {
             String subjectName = scanner.nextLine();
 
             // 💡 [자바 내장 날짜 API 활용]
-            LocalDate parsedDate = null;
+            LocalDate parsedDate;
             while (true) {
                 System.out.print("마감일 (예: 06-20, 11/15): ");
                 String inputDeadline = scanner.nextLine();
@@ -61,7 +61,7 @@ public class TaskManager {
                 }
             }
 
-            String gradingType = "";
+            String gradingType;
             while (true) {
                 System.out.print("평가 방식 (1: 절대평가, 2: 상대평가): ");
                 String gradingInput = scanner.nextLine().trim();
@@ -75,7 +75,7 @@ public class TaskManager {
                 System.out.println("🚨 [입력 오류] 1(절대평가) 또는 2(상대평가)만 입력 가능합니다. 다시 선택해주세요.");
             }
 
-            String testType = "";
+            String testType;
             while (true) {
                 System.out.print("평가 방식 (1: 과제제출, 2: 필기시험): ");
                 String testInput = scanner.nextLine().trim();
@@ -89,8 +89,12 @@ public class TaskManager {
                 System.out.println("🚨 [입력 오류] 1(과제제출) 또는 2(필기시험)만 입력 가능합니다. 다시 선택해주세요.");
             }
 
-            Task newTask = new Task(subjectName, parsedDate, gradingType, testType);
-            taskList.add(newTask);
+            // 입력받은 type(1:전공, 2:교양)에 맞춰서 알맞은 자식 객체를 생성해야 해!
+            if (type == 1) {
+                taskList.add(new MajorTask(subjectName, parsedDate, gradingType, testType));
+            } else {
+                taskList.add(new ElectiveTask(subjectName, parsedDate, gradingType, testType));
+            }
         }
 
         Collections.sort(taskList);
